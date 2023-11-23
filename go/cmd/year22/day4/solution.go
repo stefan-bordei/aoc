@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/stefan-bordei/goAOC/internal/utils"
+	"github.com/stefan-bordei/goAOC/cmd/utils"
 )
 
 func Solve(d string) (string, string, error) {

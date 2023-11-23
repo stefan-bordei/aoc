@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"os"
-    "github.com/stefan-bordei/goAOC/internal/engine"
+
+	"github.com/stefan-bordei/goAOC/cmd/engine"
 )
 
 func main() {
@@ -27,12 +27,5 @@ func main() {
         day, year = allArgs[0], allArgs[1]
     }
 
-    fmt.Printf("\t----- AoC -----\nday: %s\nyear: %s\n\n", day, year)
-
-    part_one, part_two, err := engine.Solve(year, day)
-    if err != nil {
-        panic(err)
-    }
-
-    fmt.Printf("\t~RESULT~\n\nPart1: %s\nPart2: %s\n", part_one, part_two)
+    engine.PrintResults(year, day)
 }
