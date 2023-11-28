@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-const NOT_DONE = "NotDone"
+const NOT_DONE = "In Progress..."
 
 func readFileInput(p string) (string, error) {
     filePath, _ := filepath.Abs(p)
