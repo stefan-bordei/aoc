@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"regexp"
 	"strings"
 )
 
@@ -13,7 +12,7 @@ const NOT_DONE = "NotDone"
 func readFileInput(p string) (string, error) {
     filePath, _ := filepath.Abs(p)
     contents, err := os.ReadFile(filePath)
-    return strings.TrimSpace(string(contents)), err
+    return string(contents), err
 }
 
 func GetInput(y string, d string) (string, error) {
@@ -31,7 +30,8 @@ func SumUp(s []int) int {
 }
 
 func SplitByEmptyNewline(s string) []string {
-    res := regexp.MustCompile(`\n\s*\n`).Split(s, -1)
+    //res := regexp.MustCompile(`\n\s*\n`).Split(s, -1)
+    res := strings.Split(s, "\n\n")
     return res
 
 }
