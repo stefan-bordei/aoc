@@ -1,7 +1,6 @@
 package day5
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 
@@ -49,7 +48,6 @@ func partOne(stacks string, d []string) (string, error) {
     for _, i := range s {
         if i > '0' && i <= '9' {
             res += string(c[string(i)][len(c[string(i)])-1])
-            fmt.Printf("%s\n", res)
         }
     }
 

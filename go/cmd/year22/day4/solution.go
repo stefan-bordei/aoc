@@ -8,6 +8,7 @@ import (
 )
 
 func Solve(d string) (string, string, error) {
+    d = strings.TrimSpace(d)
     s:= utils.SplitLines(d)
 
     part_one, err := partOne(s)

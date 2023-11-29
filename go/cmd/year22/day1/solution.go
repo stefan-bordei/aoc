@@ -9,6 +9,7 @@ import (
 )
 
 func Solve(d string) (string, string, error) {
+    d = strings.TrimSpace(d)
     part_one, err := partOne(d)
 
     if err != nil {
