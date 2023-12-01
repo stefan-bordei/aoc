@@ -6,6 +6,8 @@ import (
 	"github.com/stefan-bordei/goAOC/cmd/engine"
 )
 
+const currentyear = "23"
+
 func main() {
     allArgs := os.Args[1:]
     var day, year string;
@@ -20,9 +22,9 @@ func main() {
     */
     switch len(allArgs) {
     case 0:
-        day, year = "1", "22"
+        day, year = "1", currentyear
     case 1:
-        day, year = allArgs[0], "22"
+        day, year = allArgs[0], currentyear
     default:
         day, year = allArgs[0], allArgs[1]
     }

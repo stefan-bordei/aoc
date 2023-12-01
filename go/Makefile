@@ -1,6 +1,6 @@
-DEFAULT_YEAR=22
+CURRENT_YEAR=23
 GOCMD=go
-GOTEST=$(GOCMD) test ./cmd/year$(DEFAULT_YEAR)/...
+GOTEST=$(GOCMD) test ./cmd/year$(CURRENT_YEAR)/...
 BINARY_NAME=goAOC
 
 build:
@@ -12,3 +12,6 @@ run:
 
 test:
 	$(GOTEST)
+
+testday:
+	$(GOCMD) test ./cmd/year$(CURRENT_YEAR)/day$(day)/
