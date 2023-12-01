@@ -1,7 +1,7 @@
 package day1
 
 import (
-	"errors"
+	"fmt"
 	"strconv"
 	"strings"
 	"unicode"
@@ -25,7 +25,6 @@ func Solve(d string) (string, string, error) {
     d = strings.TrimSpace(d)
     s := utils.SplitLines(d)
     part_one, err := partOne(s)
-
     if err != nil {
         return utils.NOT_DONE, utils.NOT_DONE, err
     }
@@ -85,7 +84,7 @@ func firstDigit(s string) (rune, error) {
             return c, nil
         }
     }
-    return rune(0), errors.New("Could not find digit in string")
+    return rune(0), nil
 }
 
 func lastDigit(s string) (rune, error) {
