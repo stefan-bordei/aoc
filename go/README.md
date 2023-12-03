@@ -1,1 +1,1 @@
-# goAOC
+# aoc/go

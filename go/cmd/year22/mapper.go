@@ -1,12 +1,12 @@
 package mapper22
 
 import (
-	"github.com/stefan-bordei/goAOC/cmd/year22/day1"
-	"github.com/stefan-bordei/goAOC/cmd/year22/day2"
-	"github.com/stefan-bordei/goAOC/cmd/year22/day3"
-	"github.com/stefan-bordei/goAOC/cmd/year22/day4"
-	"github.com/stefan-bordei/goAOC/cmd/year22/day5"
-	"github.com/stefan-bordei/goAOC/cmd/year22/day6"
+	"github.com/stefan-bordei/aoc/go/cmd/year22/day1"
+	"github.com/stefan-bordei/aoc/go/cmd/year22/day2"
+	"github.com/stefan-bordei/aoc/go/cmd/year22/day3"
+	"github.com/stefan-bordei/aoc/go/cmd/year22/day4"
+	"github.com/stefan-bordei/aoc/go/cmd/year22/day5"
+	"github.com/stefan-bordei/aoc/go/cmd/year22/day6"
 )
 
 

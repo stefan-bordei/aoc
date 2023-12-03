@@ -3,7 +3,7 @@ package day6
 import (
 	"fmt"
 
-	"github.com/stefan-bordei/goAOC/cmd/utils"
+	"github.com/stefan-bordei/aoc/go/cmd/utils"
 )
 
 func Solve(d string) (string, string, error) {

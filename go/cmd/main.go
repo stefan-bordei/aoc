@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/stefan-bordei/goAOC/cmd/engine"
+	"github.com/stefan-bordei/aoc/go/cmd/engine"
 )
 
 const currentyear = "23"

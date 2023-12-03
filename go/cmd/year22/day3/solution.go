@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/stefan-bordei/goAOC/cmd/utils"
+	"github.com/stefan-bordei/aoc/go/cmd/utils"
 )
 
 type backpackError struct {

@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/stefan-bordei/goAOC/cmd/utils"
-	"github.com/stefan-bordei/goAOC/cmd/year22"
-	"github.com/stefan-bordei/goAOC/cmd/year23"
+	"github.com/stefan-bordei/aoc/go/cmd/utils"
+	"github.com/stefan-bordei/aoc/go/cmd/year22"
+	"github.com/stefan-bordei/aoc/go/cmd/year23"
 )
 
 

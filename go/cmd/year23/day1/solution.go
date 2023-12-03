@@ -5,7 +5,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/stefan-bordei/goAOC/cmd/utils"
+	"github.com/stefan-bordei/aoc/go/cmd/utils"
 )
 
 var digitMapping = map[string]rune{

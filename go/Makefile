@@ -1,7 +1,7 @@
 CURRENT_YEAR=23
 GOCMD=go
 GOTEST=$(GOCMD) test ./cmd/year$(CURRENT_YEAR)/...
-BINARY_NAME=goAOC
+BINARY_NAME=aoc/go
 
 build:
 	mkdir -p build/bin
