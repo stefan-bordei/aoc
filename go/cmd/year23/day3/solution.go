@@ -27,7 +27,7 @@ func Solve(d string) (string, string, error) {
 func partOne(d []string) (string, error) {
     res := 0
     for posL, l := range d {
-        nums := strings.FieldsFunc(l, split)
+        nums := extractNums(l)
         for _, num := range nums {
             valid := false
             start := strings.Index(l, num)
@@ -47,22 +47,85 @@ func partOne(d []string) (string, error) {
                 }
                 res += t
             }
-            for i := start; i <= end; i++ {
-                out := []rune(l)
-                out[i] = rune('.')
-                l = string(out)
-            }
+            l = replaceSlice(l, start, end, rune('.'))
         }
     }
     return strconv.Itoa(res), nil
 }
 
 func partTwo(d []string) (string, error) {
-    return utils.NOT_DONE, nil
+    res := 0
+    for posL, l := range d {
+        for posC, c := range l {
+            if c == '*' {
+                res += gearsValue(d, posC, posL)
+            }
+        }
+    }
+    return strconv.Itoa(res), nil
+}
+
+func gearsValue(s []string, x, y int) int {
+    res := 0
+
+    vars := checkGears(s, x, y)
+    if len(vars) == 2 {
+        tempR := 1
+        for _, v := range vars {
+            temp, err := strconv.Atoi(v)
+            if err != nil {
+                panic(err)
+            }
+            tempR *= temp
+        }
+        res += tempR
+    }
+    return res
+}
+
+func checkGears(s []string, x, y int) []string {
+    res := []string{}
+    switch y {
+    case 0:
+        res = append(res, inlineGears(s[y], x)...)
+        res = append(res, inlineGears(s[y + 1], x)...)
+    case len(s) - 1:
+        res = append(res, inlineGears(s[y - 1], x)...)
+        res = append(res, inlineGears(s[y], x)...)
+    default:
+        res = append(res, inlineGears(s[y - 1], x)...)
+        res = append(res, inlineGears(s[y], x)...)
+        res = append(res, inlineGears(s[y + 1], x)...)
+    }
+
+    return res
+}
+
+func inlineGears(s string, x int) []string {
+    res := []string{}
+    nums := extractNums(s)
+    for _, num := range nums {
+        start := strings.Index(s, num)
+        end := start + len(num) - 1
+        if end >= x-1 && start <= x+1 {
+            res = append(res, num)
+        }
+        s = replaceSlice(s, start, end, rune('.'))
+    }
+    return res
 }
 
 func split(r rune) bool {
     return !unicode.IsDigit(r) || r == '.'
+}
+
+func replaceSlice(s string, start, end int, r rune) string {
+    for i := start; i <= end; i++ {
+        out := []rune(s)
+        out[i] = r
+        s = string(out)
+    }
+    return s
 }
 
 func inlineCheck(s string, start, end int) bool {
@@ -87,5 +150,9 @@ func boundryCheck(s string, start, end int) bool {
         }
     }
     return temp
+}
+
+func extractNums(s string) []string {
+    return strings.FieldsFunc(s, split)
 }
 
