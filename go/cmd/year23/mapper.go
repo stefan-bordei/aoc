@@ -6,6 +6,7 @@ import (
 	"github.com/stefan-bordei/aoc/go/cmd/year23/day3"
 	"github.com/stefan-bordei/aoc/go/cmd/year23/day4"
 	"github.com/stefan-bordei/aoc/go/cmd/year23/day5"
+	"github.com/stefan-bordei/aoc/go/cmd/year23/day6"
 )
 
 
@@ -19,6 +20,7 @@ func Solve(d string, i string) (string, string, error) {
         "3": day3.Solve,
         "4": day4.Solve,
         "5": day5.Solve,
+        "6": day6.Solve,
     }
 
 
