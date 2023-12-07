@@ -50,7 +50,7 @@ func TestSolution(t *testing.T) {
         {
             name: "example2",
             input: example,
-            want: "In Progress...",
+            want: "46",
         },
     }
     for _, tt := range tests {

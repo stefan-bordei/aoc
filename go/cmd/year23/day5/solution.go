@@ -18,11 +18,33 @@ type Seed struct {
     Location int
 }
 
+type Stack[][]int
+
+func (s *Stack) IsEmpty() bool {
+    return len(*s) == 0
+}
+
+func (s *Stack) Push(i []int) {
+    *s = append(*s, i)
+}
+
+func (s *Stack) Pop() ([]int, bool) {
+    if s.IsEmpty() {
+        return []int{}, false
+    } else {
+        idx := len(*s) - 1
+        elem := (*s)[idx]
+        *s = (*s)[:idx]
+        return elem, true
+    }
+}
+
 func Solve(d string) (string, string, error) {
     s := utils.SplitByEmptyNewline(strings.TrimSpace(d))
 
     seeds := strings.Split(strings.Split(s[0], ": ")[1], " ")
     var sMap []*Seed
+    var seedStack Stack
     for _, seed := range seeds {
         sTmp, err := strconv.Atoi(seed)
         if err != nil {
@@ -39,12 +61,25 @@ func Solve(d string) (string, string, error) {
                             })
     }
 
+    for i := 0; i < len(seeds) - 1; i += 2 {
+        lTmp, err := strconv.Atoi(seeds[i])
+        if err != nil {
+            return utils.NOT_DONE, utils.NOT_DONE, err
+        }
+        rTmp, err := strconv.Atoi(seeds[i + 1])
+        if err != nil {
+            return utils.NOT_DONE, utils.NOT_DONE, err
+        }
+        sTemp := []int{lTmp - 1, rTmp + lTmp - 1}
+        seedStack.Push(sTemp)
+    }
+
     partOne, err := partOne(sMap, s[1:])
     if err != nil {
         return utils.NOT_DONE, utils.NOT_DONE, err
     }
 
-    partTwo, err := partTwo(sMap, s[1:])
+    partTwo, err := partTwo(&seedStack, s[1:])
     if err != nil {
         return utils.NOT_DONE, utils.NOT_DONE, err
     }
@@ -91,6 +126,83 @@ func partOne(s []*Seed, d[]string) (string, error) {
     return strconv.Itoa(res), nil
 }
 
+func partTwo(s *Stack, d []string) (string, error) {
+    res := 0
+    for _, elems := range d {
+        t := utils.SplitLines(elems)[1:]
+        temp := Stack{}
+        for len(*s) > 0 {
+            check := false
+            tmp, _ := s.Pop()
+            left := tmp[0]
+            right := tmp[1]
+            for _, e := range t {
+                elem := strings.Split(e, " ")
+                rDest, err := strconv.Atoi(elem[0])
+                if err != nil {
+                    return utils.NOT_DONE, err
+                }
+
+                rSource, err := strconv.Atoi(elem[1])
+                if err != nil {
+                    return utils.NOT_DONE, err
+                }
+
+                rLen, err := strconv.Atoi(elem[2])
+                if err != nil {
+                    return utils.NOT_DONE, err
+                }
+                ol := max(left, rSource)
+                or := min(right, rSource + rLen)
+                if ol < or {
+                    check = true
+                    temp.Push([]int{ol - rSource + rDest, or - rSource + rDest})
+                    if ol > left {
+                        s.Push([]int{left, ol})
+                    }
+                    if right > or {
+                        s.Push([]int{or, right})
+                    }
+                    break
+                }
+            }
+            if !check { // not updated above, insert defaults
+                temp.Push([]int{left, right})
+            }
+        }
+        *s = temp
+    }
+    res = minRangeStart(s)
+
+    return strconv.Itoa(res), nil
+}
+
+func max(x, y int) int {
+    if x > y {
+        return x
+    }
+    return y
+}
+
+func min(x, y int) int {
+    if x < y {
+        return x
+    }
+    return y
+}
+
+func minRangeStart(s *Stack) int {
+    temp, _ := s.Pop()
+    res := temp[0]
+    for len(*s) > 0 {
+        f, _ := s.Pop()
+        if f[0] < res {
+            res = f[0]
+        }
+    }
+    return res
+}
+
 func finishMapping(o *Seed, check int) {
     switch check {
     case 0:
@@ -123,10 +235,6 @@ func finishMapping(o *Seed, check int) {
         }
     }
 
-}
-
-func partTwo(s []*Seed, d []string) (string, error) {
-    return utils.NOT_DONE, nil
 }
 
 func updateMapping(s, d, l int, o *Seed, check int) {
