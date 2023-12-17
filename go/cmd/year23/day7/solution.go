@@ -35,7 +35,7 @@ type Hand struct {
 func Solve(d string) (string, string, error) {
     s := utils.SplitLines(strings.TrimSpace(d))
 
-    c, err := parse(s, Strength)
+    c, err := parse(s, Strength, false)
     if err != nil {
         return utils.NOT_DONE, utils.NOT_DONE, err
     }
@@ -46,7 +46,7 @@ func Solve(d string) (string, string, error) {
     }
 
     Strength['J'] = 1
-    c2, err := parse(s, Strength)
+    c2, err := parse(s, Strength, true)
     if err != nil {
         return utils.NOT_DONE, utils.NOT_DONE, err
     }
@@ -80,7 +80,7 @@ func partTwo(d []*Hand) (string, error) {
     return partOne(d)
 }
 
-func parse(s []string, m map[rune]int) ([]*Hand, error) {
+func parse(s []string, m map[rune]int, j bool) ([]*Hand, error) {
     res := []*Hand{}
     for _, h := range s {
         t := strings.Split(h, " ")
@@ -97,21 +97,42 @@ func parse(s []string, m map[rune]int) ([]*Hand, error) {
             }
             cards = append(cards, v)
         }
-        ty := cathegorize(cards)
+        ty := cathegorize(cards, j)
         res = append(res, &Hand{In: t[0], Cards: cards, Score: score, Type: ty})
     }
     return res, nil
 }
 
-func cathegorize(c []int) int {
+func cathegorize(c []int, j bool) int {
     temp := map[int]int{}
-    for _, x := range c {
-        _, ok := temp[x]
-        if !ok {
-            temp[x] = 1
-        } else {
-            temp[x] += 1
+    if !j {
+        for _, x := range c {
+            _, ok := temp[x]
+            if !ok {
+                temp[x] = 1
+            } else {
+                temp[x] += 1
+            }
         }
+    } else {
+        jkr := 0
+        for _, v := range c {
+            if v == 1 { jkr++; continue }
+            _, ok := temp[v]
+            if !ok {
+                temp[v] = 1
+            } else {
+                temp[v] += 1
+            }
+        }
+
+        // get max group
+        r, m := 0, 0
+        for k, v := range temp {
+            if v > m { r, m = k, v }
+        }
+
+        temp[r] += jkr
     }
     switch len(temp) {
         case 1:
