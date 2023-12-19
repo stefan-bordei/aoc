@@ -1,7 +1,7 @@
 package day8
 
 import (
-	"fmt"
+	"errors"
 	"strconv"
 	"strings"
 
@@ -24,36 +24,84 @@ func Solve(d string) (string, string, error) {
         v := strings.Split(t[1][1:len(t[1])-1], ", ")
         nodes[t[0]] = v
     }
-    partOne, err := partOne(instructions, nodes)
-    if err != nil {
-        return utils.NOT_DONE, utils.NOT_DONE, err
-    }
+    partOne, _ := partOne(instructions, nodes, "AAA", "ZZZ")
 
-    partTwo, err := partTwo(s)
-    if err != nil {
-        return utils.NOT_DONE, utils.NOT_DONE, err
-    }
+    partTwo, _ := partTwo(instructions, nodes, "A", "Z")
 
     return partOne, partTwo, nil
 }
 
-func partOne(i string, n map[string][]string) (string, error) {
+func partOne(i string, n map[string][]string, start, stop string) (string, error) {
     res := 0
-    fmt.Printf("I: %s\n\nNodes: %s\n", i, n)
-    start := "AAA"
+    s := start
 
     for {
-        if start == "ZZZ" { break }
+        if s == stop { break }
         for _, c := range i {
             res++
-            temp := n[start][Instrction[c]]
-            start = string(temp)
+            temp, ok := n[s]
+            if !ok {
+                return utils.NOT_DONE, errors.New("Node not found.")
+            }
+            s = string(temp[Instrction[c]])
         }
     }
     return strconv.Itoa(res), nil
 }
 
-func partTwo(d []string) (string, error) {
+func partTwo(i string, n map[string][]string, start, stop string) (string, error) {
     res := 0
+    startingPoints := []string{}
+    // get all the starting nodes
+    for k, _ := range n {
+        if strings.Contains(k, start) {
+            startingPoints = append(startingPoints, k)
+        }
+    }
+
+    cycles := []int{}
+    for _, s := range startingPoints {
+        tmp := 0
+        for {
+            if strings.Contains(s, stop) { break }
+            for _, c := range i {
+                tmp++
+                temp, ok := n[s]
+                if !ok {
+                    return utils.NOT_DONE, errors.New("Node not found.")
+                }
+                s = string(temp[Instrction[c]])
+            }
+        }
+        cycles = append(cycles, tmp)
+    }
+    res = lcm(cycles...)
+
     return strconv.Itoa(res), nil
+}
+
+func lcm(integers ...int) int {
+    if len(integers) == 1 {
+        return integers[0]
+    }
+    x := integers[0]
+    y := integers[1]
+    result := x * y / gcd(x, y)
+
+    if len(integers) == 2 {
+        return result
+    }
+    for i := 0; i < len(integers); i++ {
+        result = lcm(result, integers[i])
+    }
+    return result
+}
+
+func gcd(x, y int) int {
+    for y != 0 {
+        temp := y
+        y = x % y
+        x = temp
+    }
+    return x
 }
