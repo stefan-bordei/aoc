@@ -1,7 +1,6 @@
 package day8
 
 import (
-	"fmt"
 	"testing"
 )
 
