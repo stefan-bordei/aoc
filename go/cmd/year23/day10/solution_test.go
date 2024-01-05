@@ -14,7 +14,7 @@ var example2 = `.....
 .L-J.
 .....`
 
-var example3 =`7-F7-
+var example3 = `7-F7-
 .FJ|7
 SJLL7
 |F--J
@@ -51,7 +51,7 @@ L--J.L7...LJS7F-7L7.
 ....FJL-7.||.||||...
 ....L---J.LJ.LJLJ...`
 
-var example7 =`FF7FSF7F7F7F7F7F---7
+var example7 = `FF7FSF7F7F7F7F7F---7
 L|LJ||||||||||||F--J
 FL-7LJLJ||||||LJL-77
 F--JF--7||LJLJ7F7FJ-
@@ -63,83 +63,83 @@ L.L7LFJ|||||FJL7||LJ
 L7JLJL-JLJLJL--JLJ.L`
 
 func TestSolution(t *testing.T) {
-    tests := []struct {
-        name string
-        input string
-        want string
-    }{
-        {
-            name: "example1",
-            input: example,
-            want: "8",
-        },
-        {
-            name: "example2",
-            input: example2,
-            want: "4",
-        },
-        {
-            name: "example3",
-            input: example3,
-            want: "8",
-        },
-        {
-            name: "example4",
-            input: example4,
-            want: "4",
-        },
-        {
-            name: "example5",
-            input: example5,
-            want: "4",
-        },
-        {
-            name: "example6",
-            input: example6,
-            want: "8",
-        },
-        {
-            name: "example7",
-            input: example7,
-            want: "10",
-        },
-    }
-    for _, tt := range tests {
-        t.Run(tt.name, func(t *testing.T) {
-            if tt.name == "example1" {
-                if got, _, _ := Solve(tt.input); got != tt.want {
-                    t.Errorf("part1a() = %v, want %v", got, tt.want)
-                }
-            } else if tt.name == "example2" {
-                if got, _, _ := Solve(tt.input); got != tt.want {
-                    t.Errorf("part1b() = %v, want %v", got, tt.want)
-                }
-            } else if tt.name == "example3" {
-                if got, _, _ := Solve(tt.input); got != tt.want {
-                    t.Errorf("part1c() = %v, want %v", got, tt.want)
-                }
-            } else if tt.name == "example4" {
-                if _, got, _ := Solve(tt.input); got != tt.want {
-                    t.Errorf("part2a() = %v, want %v", got, tt.want)
-                }
-            } else if tt.name == "example5" {
-                if _, got, _ := Solve(tt.input); got != tt.want {
-                    t.Errorf("part2b() = %v, want %v", got, tt.want)
-                }
-            } else if tt.name == "example6" {
-                if _, got, _ := Solve(tt.input); got != tt.want {
-                    t.Errorf("part2c() = %v, want %v", got, tt.want)
-                }
-            } else if tt.name == "example7" {
-                if _, got, _ := Solve(tt.input); got != tt.want {
-                    t.Errorf("part2d() = %v, want %v", got, tt.want)
-                }
-            } else {
-                if _, got, _ := Solve(tt.input); got != tt.want {
-                    t.Errorf("part2e() = %v, want %v", got, tt.want)
-                }
-            }
+	tests := []struct {
+		name  string
+		input string
+		want  string
+	}{
+		{
+			name:  "example1",
+			input: example,
+			want:  "8",
+		},
+		{
+			name:  "example2",
+			input: example2,
+			want:  "4",
+		},
+		{
+			name:  "example3",
+			input: example3,
+			want:  "8",
+		},
+		{
+			name:  "example4",
+			input: example4,
+			want:  "4",
+		},
+		{
+			name:  "example5",
+			input: example5,
+			want:  "4",
+		},
+		{
+			name:  "example6",
+			input: example6,
+			want:  "8",
+		},
+		{
+			name:  "example7",
+			input: example7,
+			want:  "10",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if tt.name == "example1" {
+				if got, _, _ := Solve(tt.input); got != tt.want {
+					t.Errorf("part1a() = %v, want %v", got, tt.want)
+				}
+			} else if tt.name == "example2" {
+				if got, _, _ := Solve(tt.input); got != tt.want {
+					t.Errorf("part1b() = %v, want %v", got, tt.want)
+				}
+			} else if tt.name == "example3" {
+				if got, _, _ := Solve(tt.input); got != tt.want {
+					t.Errorf("part1c() = %v, want %v", got, tt.want)
+				}
+			} else if tt.name == "example4" {
+				if _, got, _ := Solve(tt.input); got != tt.want {
+					t.Errorf("part2a() = %v, want %v", got, tt.want)
+				}
+			} else if tt.name == "example5" {
+				if _, got, _ := Solve(tt.input); got != tt.want {
+					t.Errorf("part2b() = %v, want %v", got, tt.want)
+				}
+			} else if tt.name == "example6" {
+				if _, got, _ := Solve(tt.input); got != tt.want {
+					t.Errorf("part2c() = %v, want %v", got, tt.want)
+				}
+			} else if tt.name == "example7" {
+				if _, got, _ := Solve(tt.input); got != tt.want {
+					t.Errorf("part2d() = %v, want %v", got, tt.want)
+				}
+			} else {
+				if _, got, _ := Solve(tt.input); got != tt.want {
+					t.Errorf("part2e() = %v, want %v", got, tt.want)
+				}
+			}
 
-        })
-    }
+		})
+	}
 }

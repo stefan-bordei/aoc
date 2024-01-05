@@ -9,35 +9,32 @@ import (
 	"github.com/stefan-bordei/aoc/go/cmd/year23"
 )
 
-
-type fn func (string, string) (string, string, error)
-
+type fn func(string, string) (string, string, error)
 
 func GetResults(y string, d string) (string, string, error) {
-    m := map[string]fn {
-        "22": mapper22.Solve,
-        "23": mapper23.Solve,
-    }
+	m := map[string]fn{
+		"22": mapper22.Solve,
+		"23": mapper23.Solve,
+	}
 
-    puzzle_input, err := utils.GetInput(y, d)
+	puzzle_input, err := utils.GetInput(y, d)
 
-    if err != nil {
-        log.Fatal("Unable to get input data.")
-    }
+	if err != nil {
+		log.Fatal("Unable to get input data.")
+	}
 
-    p1, p2, err := m[y](d, puzzle_input)
+	p1, p2, err := m[y](d, puzzle_input)
 
-    return p1, p2, err
+	return p1, p2, err
 }
 
 func PrintResults(y string, d string) {
-    fmt.Printf("\t----- AoC -----\nday: %s\nyear: %s\n\n", d, y)
+	fmt.Printf("\t----- AoC -----\nday: %s\nyear: %s\n\n", d, y)
 
-    p1, p2, err := GetResults(y, d)
-    if err != nil {
-        log.Fatal(err)
-    }
+	p1, p2, err := GetResults(y, d)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    fmt.Printf("\t~RESULT~\n\nPart1: %s\nPart2: %s\n", p1, p2)
+	fmt.Printf("\t~RESULT~\n\nPart1: %s\nPart2: %s\n", p1, p2)
 }
-
