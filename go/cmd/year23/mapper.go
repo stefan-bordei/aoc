@@ -11,6 +11,7 @@ import (
 	"github.com/stefan-bordei/aoc/go/cmd/year23/day08"
 	"github.com/stefan-bordei/aoc/go/cmd/year23/day09"
 	"github.com/stefan-bordei/aoc/go/cmd/year23/day10"
+	"github.com/stefan-bordei/aoc/go/cmd/year23/day11"
 )
 
 type fn func(string) (string, string, error)
@@ -27,6 +28,7 @@ func Solve(d string, i string) (string, string, error) {
 		"8":  day08.Solve,
 		"9":  day09.Solve,
 		"10": day10.Solve,
+		"11": day11.Solve,
 	}
 
 	part_one, part_two, err := m[d](i)
